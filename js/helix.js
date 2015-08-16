@@ -4,12 +4,14 @@ function helix() {
   var stop_button = document.getElementById('stop_button');
   var reset_button = document.getElementById('reset_button');
   var count_field = document.getElementById('rectangle_count');
+  var width_field = document.getElementById('rectangle_width');
+  var height_field = document.getElementById('rectangle_height');
   var x = 0, y = 0, width = myCanvas.width, height = myCanvas.height, offset = 0;
   var interval;
 
   function drawManyRectangles() {
-    width = 20;
-    height = 20;
+    width = width_field.value;
+    height = height_field.value;
 
     var redraw = function() {
       clear();
