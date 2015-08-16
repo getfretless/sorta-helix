@@ -3,8 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Some Sorta Helix?</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   <body>
+    <div class="well col-sm-3 col-xs-4">
+      <h1>Heeeeelix</h1>
+      <form role="form">
+        <div class="form-group">
+          <label for="n">Rectangle count</label>
+          <input class="form-control" type="text" name="n" value="20">
+        </div>
+      </form>
+    </div>
+
+    <div class="col-sm-9 col-xs-8">
+      <canvas id="myCanvas" width="500" height="300"></canvas>
+    </div>
 
     <script src="js/helix.js"></script>
   </body>
