@@ -12,7 +12,7 @@ function helix() {
     height = 20;
 
     var redraw = function() {
-      context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+      clear();
       for (var i=0; i < rectangle_count; i++) {
         x = i/10 * myCanvas.width + offset;
         y = i/10 * myCanvas.height + offset;
@@ -29,10 +29,15 @@ function helix() {
     clearInterval(interval);
   }
 
+  function clear() {
+    context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  }
+
   animate_button.onclick = drawManyRectangles;
   stop_button.onclick = stop;
   reset_button.onclick = function () {
     offset = 0;
+    clear();
   };
 }
 helix();
