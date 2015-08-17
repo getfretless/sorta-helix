@@ -3,7 +3,7 @@ function helix() {
   var f = document.querySelector('form');
 
   var x = 0, y = 0, width = myCanvas.width, height = myCanvas.height, offset = 0;
-  var interval;
+  var interval, intervals = [];
 
   f.n.focus();
 
@@ -34,6 +34,7 @@ function helix() {
       clear();
       width = f.w.value * Math.random();
       height = f.h.value * Math.random();
+
       for (var i=0; i < f.n.value; i++) {
         sin = Math.sin(i / 20 + offset) / 2 + 0.5;
         cos = Math.cos(i / 20 + offset) / 2 + 0.5;
@@ -48,6 +49,35 @@ function helix() {
     interval = setInterval(redraw, 20);
   }
 
+
+  function pendulums(ev) {
+    ev.preventDefault();
+
+    var redraw = function() {
+      clear();
+      width = f.w.value;
+      height = f.h.value;
+
+      for (var i=0; i < f.n.value; i++) {
+        x = myCanvas.width / 2 + Math.sin(offset * i) * 100;
+        y = i / f.n.value * myCanvas.height;
+        context.fillRect(x, y, width, height);
+      }
+      offset += 0.2;
+    };
+
+    stopPendulums();
+    intervals.push(setInterval(redraw, 60));
+  }
+
+  function stopPendulums() {
+    var removed_item;
+    while (intervals.length > 0) {
+      removed_item = intervals.pop();
+      clearInterval(removed_item);
+    }
+  }
+
   function stop() {
     clearInterval(interval);
   }
@@ -56,8 +86,8 @@ function helix() {
     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
   }
 
-  f.onsubmit = animateCircle;
-  f.stop.onclick = stop;
+  f.onsubmit = pendulums;
+  f.stop.onclick = stopPendulums;
 
   f.reset.onclick = function () {
     offset = 0;
